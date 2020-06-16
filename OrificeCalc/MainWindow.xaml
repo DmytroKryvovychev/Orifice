@@ -1,0 +1,1023 @@
+﻿<Window x:Class="MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Orifice" AllowsTransparency="True" ResizeMode="NoResize" WindowStyle="None" Background="Transparent" Height="450" Width="600"
+    WindowStartupLocation="CenterScreen" Icon="orifice.png">
+
+    <Window.Resources>
+        
+        <Style TargetType="CheckBox" x:Key="CheckBoxTemp">
+            <Setter Property="SnapsToDevicePixels" Value="False" />
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="BorderBrush" Value="LightGray" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <BulletDecorator Background="Transparent">
+                            <BulletDecorator.Bullet>
+                                <Border x:Name="bullborder" Width="15" Height="15"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="1" ClipToBounds="True">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="2" ShadowDepth="1" />
+                                    </Border.Effect>
+                                    <Path x:Name="CheckMark" Width="8" Height="8" HorizontalAlignment="Center"
+                                          VerticalAlignment="Center" Data="M 0 0 L 8 8 M 0 8 L 8 0" Stretch="Fill"
+                                          Stroke="#FF505369" StrokeEndLineCap="Round" StrokeStartLineCap="Round"
+                                          StrokeThickness="2" />
+                                </Border>
+                            </BulletDecorator.Bullet>
+                            <ContentPresenter Margin="4,0,0,0" HorizontalAlignment="Left"
+                                              VerticalAlignment="Center" RecognizesAccessKey="True" />
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter TargetName="CheckMark" Property="Visibility" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="BorderBrush" Value="Black" />
+                                <Setter TargetName="CheckMark" Property="Stroke" Value="Gray" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style TargetType="{x:Type RadioButton}" x:Key="buttonstripe1">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Cursor="Hand">
+                            <Border CornerRadius="3" BorderBrush="White" BorderThickness="1">
+                                <Grid>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />    
+                                    <Border Margin="5,0,48,0" Background="#FFCDCDCD" CornerRadius="1" Name="RadioMark" />
+                                </Grid>
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0" />
+                                        <GradientStop Color="White" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="RadioMark" Property="Background" Value="Gold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type RadioButton}" x:Key="buttonstripe2">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Cursor="Hand">
+                            <Border CornerRadius="3" BorderBrush="White" BorderThickness="1">
+                                <Grid>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />                            
+                                    <Border Margin="5,0,108,0" Background="#FFCDCDCD" CornerRadius="1" Name="RadioMark" />
+                                </Grid>
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0" />
+                                        <GradientStop Color="White" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="RadioMark" Property="Background" Value="Gold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type RadioButton}" x:Key="buttonstripe3">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Cursor="Hand">
+                            <Border CornerRadius="3" BorderBrush="White" BorderThickness="1">
+                                <Grid>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Border Margin="5,0,108,0" Background="#FFCDCDCD" CornerRadius="1" Name="RadioMark" />
+                                </Grid>
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0" />
+                                        <GradientStop Color="White" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="RadioMark" Property="Background" Value="Gold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type RadioButton}" x:Key="HyLoss">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Cursor="Hand">
+                            <Border CornerRadius="3" BorderBrush="White" BorderThickness="1">
+                                <Grid>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Border Margin="5,0,123,0" Background="#FFCDCDCD" CornerRadius="1" Name="RadioMark" />
+                                </Grid>
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0" />
+                                        <GradientStop Color="White" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="RadioMark" Property="Background" Value="Gold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type RadioButton}" x:Key="FDLa">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Cursor="Hand">
+                            <Border CornerRadius="3" BorderBrush="White" BorderThickness="1">
+                                <Grid>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Border Margin="5,0,113,0" Background="#FFCDCDCD" CornerRadius="1" Name="RadioMark" />
+                                </Grid>
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0" />
+                                        <GradientStop Color="White" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="RadioMark" Property="Background" Value="Gold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <Style TargetType="{x:Type RadioButton}" x:Key="HyRes">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Cursor="Hand">
+                            <Border CornerRadius="3" BorderBrush="White" BorderThickness="1">
+                                <Grid>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Border Margin="5,0,173,0" Background="#FFCDCDCD" CornerRadius="1" Name="RadioMark" />
+                                </Grid>
+
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0" />
+                                        <GradientStop Color="White" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="RadioMark" Property="Background" Value="Gold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type RadioButton}" x:Key="FDLd">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <BulletDecorator Cursor="Hand">
+                            <Border CornerRadius="3" BorderBrush="White" BorderThickness="1">
+                                <Grid>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Border Margin="5,0,113,0" Background="#FFCDCDCD" CornerRadius="1" Name="RadioMark" />
+                                </Grid>
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0" />
+                                        <GradientStop Color="White" Offset="1" />
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+                        </BulletDecorator>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter TargetName="RadioMark" Property="Background" Value="Gold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <ControlTemplate x:Key="ButtonTemplate2" TargetType="Button">
+            <Border x:Name="Border" BorderBrush="White"  BorderThickness="2" CornerRadius="1" TextBlock.Foreground="Black">
+                <ContentPresenter x:Name="ButtonContent" RecognizesAccessKey="True" Opacity="0.5" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="ButtonContent" Property="Opacity" Value="0.7"></Setter>
+                    <Setter TargetName="Border" Property="BorderBrush" Value="#effdff"></Setter>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="ButtonContent" Property="Opacity" Value="1"></Setter>
+                    <Setter TargetName="Border" Property="BorderBrush" Value="#A6EFF8"></Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        
+        <ControlTemplate x:Key="ButtonTemplate" TargetType="Button">
+            <Border x:Name="Border" BorderBrush="#effdff"  BorderThickness="2" CornerRadius="1" TextBlock.Foreground="Black">
+                <ContentPresenter x:Name="ButtonContent" RecognizesAccessKey="True" Opacity="0.5" HorizontalAlignment="Center" VerticalAlignment="Center"></ContentPresenter>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="ButtonContent" Property="Opacity" Value="0.8"></Setter>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="ButtonContent" Property="Opacity" Value="1"></Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </Window.Resources>
+    <Grid>
+
+        <Border Width="auto" Height="auto" BorderBrush="LightSkyBlue" BorderThickness="2"
+                CornerRadius="3,3,3,3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                    <RowDefinition Height="15"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Name="GridOr1" Grid.Row="0" Background="#effdff"></Grid>
+                <TextBlock Name="OrificeCalc" Text="Расчет жиклера" FontSize="16" FontFamily="Comic Sans MS" Padding="5" Margin="3,0,0,0"></TextBlock>
+                <Grid Name="GridOr2" Grid.Row="1">
+                    <Grid.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientBrush.GradientStops>
+                                <GradientStopCollection>
+                                    <GradientStop Color="#effdff" Offset="0.0"></GradientStop>
+                                    <GradientStop Color="White" Offset="1.0"></GradientStop>
+                                </GradientStopCollection>
+                            </GradientBrush.GradientStops>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                </Grid>
+                <Grid Grid.Row="2" Background="White">
+                    <TabControl HorizontalAlignment="Stretch" Name="TabControl1" VerticalAlignment="Stretch" BorderBrush="White" Background="White">
+                        <TabControl.Resources>
+                            <Style TargetType="TabItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="TabItem">
+                                            <Grid Name="Panel">
+                                                <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                            </Grid>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsSelected" Value="False">
+                                                    <Setter TargetName="ContentSite" Property="Opacity" Value="0.5"></Setter>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="true">
+                                                    <Setter TargetName="ContentSite" Property="Opacity" Value="0.8"></Setter>
+                                                </Trigger>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter TargetName="ContentSite" Property="Opacity" Value="1"></Setter>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </TabControl.Resources>
+                        <TabItem Header="Расчет жиклера" Height="25" Opacity="1" FontSize="16" FontFamily="Comic Sans MS" Name="TabItem1" BorderBrush="White" BorderThickness="1">
+                            <Grid Name="grid1" Margin="0,0,0,0" Opacity="1" Background="White">
+                                <Border BorderBrush="White">
+                                    <Grid>
+                                        <TextBlock FontFamily="Comic Sans MS" Margin="8,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="150" Name="TextBlock1" Text="Массовый расход ="  />
+                                        <TextBox FontFamily="Times New Roman" Margin="145,5,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBox1" VerticalAlignment="Top" Width="51">
+                                            <TextBox.ToolTip>
+                                                <ToolTip FontFamily="Segoe UI" Content="Массовый расход газа" FontSize="12" ToolTipService.ShowDuration="5">
+                                                    <ToolTip.Resources>
+                                                        <Style TargetType="ToolTip">
+                                                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                            <Setter Property="HasDropShadow" Value="True" />
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="ToolTip">
+                                                                        <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                            <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                        </Border>
+                                                                        <ControlTemplate.Triggers>
+                                                                            <Trigger Property="HasDropShadow" Value="True">
+                                                                                <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                            </Trigger>
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </ToolTip.Resources>
+                                                </ToolTip>
+                                            </TextBox.ToolTip>
+                                        </TextBox>
+                                        <TextBlock FontFamily="Comic Sans MS" Margin="200,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="35" Name="razm1" Text="кг/с"  />
+                                        <TextBlock FontFamily="Comic Sans MS" Margin="280,5,0,0"  VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="80" Name="TextBlock2" Text="Диаметр =" />
+                                        <TextBox FontFamily="Times New Roman" Margin="355,5,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBox2" VerticalAlignment="Top" Width="51">
+                                            <TextBox.ToolTip>
+                                                <ToolTip FontFamily="Segoe UI" Content="Диаметр жиклера" FontSize="12" ToolTipService.ShowDuration="5">
+                                                    <ToolTip.Resources>
+                                                        <Style TargetType="ToolTip">
+                                                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                            <Setter Property="HasDropShadow" Value="True" />
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="ToolTip">
+                                                                        <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                            <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                        </Border>
+                                                                        <ControlTemplate.Triggers>
+                                                                            <Trigger Property="HasDropShadow" Value="True">
+                                                                                <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                            </Trigger>
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </ToolTip.Resources>
+                                                </ToolTip>
+                                            </TextBox.ToolTip>
+                                        </TextBox>
+                                        <TextBlock FontFamily="Comic Sans MS" Margin="410,5,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="25" Name="razm2" Text="мм"  />
+                                        <RadioButton FontFamily="Comic Sans MS" Style="{StaticResource buttonstripe1}" Content="Азот" Height="20" FontSize="14" Width="60" HorizontalAlignment="Left" Margin="8,35,0,0" Name="RadioButton1" VerticalAlignment="Top" />
+                                        <RadioButton FontFamily="Comic Sans MS" Style="{StaticResource buttonstripe1}" Content="   Гелий" Height="20" FontSize="14" Width="60" HorizontalAlignment="Left" Margin="100,35,0,0" Name="RadioButton2" VerticalAlignment="Top" />
+                                        <GroupBox FontSize="14" FontFamily="Comic Sans MS" Margin="1,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Header="Исходные данные" Height="125" Name="GroupBox1" Width="563">
+                                            <Grid>
+                                                <TextBlock FontFamily="Comic Sans MS" Margin="8,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="165" Name="TextBlock3" Text="Показатель адиабаты ="  />
+                                                <TextBox FontFamily="Times New Roman" IsEnabled="False" Margin="170,10,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBox3" VerticalAlignment="Top" Width="51"  />
+                                                <TextBlock FontFamily="Comic Sans MS" Margin="8,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="165" Name="TextBlock4" Text="Давление   на  входе  ="  />
+                                                <TextBox FontFamily="Times New Roman" Margin="170,40,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBox4" VerticalAlignment="Top" Width="51">
+                                                    <TextBox.ToolTip>
+                                                        <ToolTip FontFamily="Segoe UI" Content="Давление газа на входе" FontSize="12" ToolTipService.ShowDuration="5">
+                                                            <ToolTip.Resources>
+                                                                <Style TargetType="ToolTip">
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="HasDropShadow" Value="True" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ToolTip">
+                                                                                <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                    <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                </Border>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="HasDropShadow" Value="True">
+                                                                                        <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                        <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ToolTip.Resources>
+                                                        </ToolTip>
+                                                    </TextBox.ToolTip>
+                                                </TextBox>
+                                                <TextBlock FontFamily="Comic Sans MS" Margin="225,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="85" Name="rasm1" Text="кгс/см2"  />
+                                                <TextBlock FontFamily="Comic Sans MS" Margin="9,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="165" Name="TextBlock5" Text="Давление на выходе  ="  />
+                                                <TextBox FontFamily="Times New Roman" Margin="170,70,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBox5" VerticalAlignment="Top" Width="51">
+                                                    <TextBox.ToolTip>
+                                                        <ToolTip FontFamily="Segoe UI" Content="Давление газа на выходе" FontSize="12" ToolTipService.ShowDuration="5">
+                                                            <ToolTip.Resources>
+                                                                <Style TargetType="ToolTip">
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="HasDropShadow" Value="True" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ToolTip">
+                                                                                <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                    <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                </Border>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="HasDropShadow" Value="True">
+                                                                                        <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                        <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ToolTip.Resources>
+                                                        </ToolTip>
+                                                    </TextBox.ToolTip>
+                                                </TextBox>
+                                                <TextBlock FontFamily="Comic Sans MS" Margin="225,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="85" Name="rasm2" Text="кгс/см2"  />
+                                                <RadioButton FontFamily="Comic Sans MS" Style="{StaticResource HyLoss}" Content="  Гидропотери ξ =" Height="26" FontSize="14" Width="135" HorizontalAlignment="Left" Margin="290,6,0,0" Name="Radio1" VerticalAlignment="Top" />
+                                                <TextBox FontFamily="Times New Roman" Margin="423,10,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBox7" VerticalAlignment="Top" Width="51">
+                                                    <TextBox.ToolTip>
+                                                        <ToolTip FontFamily="Segoe UI" Content="Коэффициент гидравлических потерь" FontSize="12" ToolTipService.ShowDuration="5">
+                                                            <ToolTip.Resources>
+                                                                <Style TargetType="ToolTip">
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="HasDropShadow" Value="True" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ToolTip">
+                                                                                <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                    <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                </Border>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="HasDropShadow" Value="True">
+                                                                                        <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                        <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ToolTip.Resources>
+                                                        </ToolTip>
+                                                    </TextBox.ToolTip>
+                                                </TextBox>
+                                                <RadioButton FontFamily="Comic Sans MS" Style="{StaticResource HyRes}" Content="   Гидросопротивление μ =" Height="26" FontSize="14" Width="185" HorizontalAlignment="Left" Margin="290,36,0,0" Name="Radio2" VerticalAlignment="Top" />
+                                                <TextBox FontFamily="Times New Roman" Margin="478,40,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBox8" VerticalAlignment="Top" Width="51">
+                                                    <TextBox.ToolTip>
+                                                        <ToolTip FontFamily="Segoe UI" Content="Коэффициент гидравлического сопротивления" FontSize="12" ToolTipService.ShowDuration="5">
+                                                            <ToolTip.Resources>
+                                                                <Style TargetType="ToolTip">
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="HasDropShadow" Value="True" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ToolTip">
+                                                                                <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                    <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                </Border>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="HasDropShadow" Value="True">
+                                                                                        <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                        <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ToolTip.Resources>
+                                                        </ToolTip>
+                                                    </TextBox.ToolTip>
+                                                </TextBox>
+                                                <TextBlock FontFamily="Comic Sans MS" Margin="303,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="175" Name="TextBlock6" Text="Температура на входе ="  />
+                                                <TextBlock FontFamily="Comic Sans MS" Margin="524,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="20" Name="rasm3a" Text="o"  />
+                                                <TextBlock FontFamily="Comic Sans MS" Margin="531,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="20" Name="rasm3" Text="C"  />
+                                                <TextBox FontFamily="Times New Roman" Margin="469,70,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBox6" VerticalAlignment="Top" Width="51">
+                                                    <TextBox.ToolTip>
+                                                        <ToolTip FontFamily="Segoe UI" Content="Температура газа на входе" FontSize="12" ToolTipService.ShowDuration="5">
+                                                            <ToolTip.Resources>
+                                                                <Style TargetType="ToolTip">
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="HasDropShadow" Value="True" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ToolTip">
+                                                                                <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                    <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                </Border>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="HasDropShadow" Value="True">
+                                                                                        <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                        <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ToolTip.Resources>
+                                                        </ToolTip>
+                                                    </TextBox.ToolTip>
+                                                </TextBox>
+                                            </Grid>
+                                        </GroupBox>
+                                        <GroupBox FontSize="14" FontFamily="Comic Sans MS" Margin="1,190,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Header="Плотность потока" Height="125" Name="GroupBox2" Width="290">
+                                            <Grid>
+                                                <RadioButton FontFamily="Comic Sans MS" Style="{StaticResource buttonstripe3}" Content="   Ван-дер-Ваальс" Height="21" FontSize="14" Width="120" HorizontalAlignment="Left" Margin="5,5,0,0" Name="Radio3" VerticalAlignment="Top" />
+                                                <RadioButton FontFamily="Comic Sans MS" Style="{StaticResource buttonstripe2}" Content="  Идеальный газ" Height="21" FontSize="14" Width="120" HorizontalAlignment="Left" Margin="155,5,0,0" Name="Radio4" VerticalAlignment="Top" />
+                                                <TextBlock FontFamily="Comic Sans MS" Margin="15,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="140" Name="TextBlock7" Text="Молярная масса ="  />
+                                                <TextBox FontFamily="Times New Roman" IsEnabled="False" Margin="140,35,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBox9" VerticalAlignment="Top" Width="51"  />
+                                                <TextBlock FontFamily="Comic Sans MS" Margin="195,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="60" Name="rasm4" Text="кг/моль"  />
+                                                <TextBlock  Margin="15,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="155" Name="TextBlock8" Text="Плотность  газа ="  />
+                                                <TextBox FontFamily="Times New Roman" IsEnabled="False" Margin="140,65,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBox10" VerticalAlignment="Top" Width="51"  />
+                                                <TextBlock FontFamily="Comic Sans MS" Margin="195,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="50" Name="rasm5" Text="кг/м3"  />
+                                            </Grid>
+                                        </GroupBox>
+                                            <Button Margin="360,200,0,0" Content="Расчет" FontFamily="Comic Sans MS" Height="45" FontSize="26" HorizontalAlignment="Left"  Name="Button1" VerticalAlignment="Top" Width="136" Template="{StaticResource ButtonTemplate2}" />
+                                        <CheckBox Margin="365,255,0,0" FontFamily="Comic Sans MS" FontSize="13" Style="{StaticResource CheckBoxTemp}" Content="Обратная задача" Height="19" HorizontalAlignment="Left" Name="CheckBox1" VerticalAlignment="Top" Width="130" />       
+                                            <Button Margin="408,280,0,0" FontFamily="Comic Sans MS" Content="OK" FontSize="20" Height="30" HorizontalAlignment="Left"  Name="Button3" VerticalAlignment="Top" Width="38" Template="{StaticResource ButtonTemplate2}" />
+                                    </Grid>
+                                </Border>
+                                <Grid.Triggers>
+                                    <EventTrigger RoutedEvent="Grid.Loaded">
+                                        <EventTrigger.Actions>
+                                            <BeginStoryboard>
+                                                <Storyboard Duration="00:00:00.4">
+                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                         Storyboard.TargetName="grid1"
+                                                         Duration="0:0:00.4" AutoReverse="False"
+                                                         FillBehavior="HoldEnd"                                                 
+                                         AccelerationRatio="0.7" From="-10,0,0,0" To="0,0,0,0" />
+                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                         Storyboard.TargetName="grid1"
+                                                         Duration="0:0:00.4" AutoReverse="False"
+                                                         FillBehavior="HoldEnd"                                                       
+                                         AccelerationRatio="0.7" From="0" To="1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                </Grid.Triggers>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Расход при сливе" Height="25" Opacity="1" FontSize="16" FontFamily="Comic Sans MS" Name="TabItem2" BorderBrush="White" BorderThickness="1">
+                            <Grid Name="grid2" Margin="0,0,0,0" Opacity="1" Background="White">
+                                <Border BorderBrush="White" BorderThickness="1">
+                                    <Grid>
+                                        <RadioButton FontFamily="Comic Sans MS" Style="{StaticResource buttonstripe1}" Content="Азот" Height="20" FontSize="14" Width="60" HorizontalAlignment="Left" Margin="8,5,0,0" Name="RadioButtonF1" VerticalAlignment="Top" />
+                                        <RadioButton FontFamily="Comic Sans MS" Style="{StaticResource buttonstripe1}" Content="   Гелий" Height="20" FontSize="14" Width="60" HorizontalAlignment="Left" Margin="120,5,0,0" Name="RadioButtonF2" VerticalAlignment="Top" />
+                                        <GroupBox FontSize="14" FontFamily="Comic Sans MS" Margin="0,35,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="563" Header="Исходные данные" Height="185" Name="GroupBoxF1">
+                                            <Grid>                                             
+                                                <TextBlock Margin="8,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="155" Name="TextBlockF4" Text="Макс-ое давление ="  />
+                                                <TextBox FontFamily="Times New Roman" Margin="145,10,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBoxF4" VerticalAlignment="Top" Width="51">
+                                                    <TextBox.ToolTip>                                                  
+                                                            <ToolTip FontFamily="Segoe UI" Content="Максимальное значение давления газа в баке при наддуве" FontSize="12" ToolTipService.ShowDuration="5">
+                                                                <ToolTip.Resources>
+                                                                    <Style TargetType="ToolTip">
+                                                                        <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                        <Setter Property="HasDropShadow" Value="True" />
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate TargetType="ToolTip">
+                                                                                    <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                        <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                    </Border>
+                                                                                    <ControlTemplate.Triggers>
+                                                                                        <Trigger Property="HasDropShadow" Value="True">
+                                                                                            <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                            <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                        </Trigger>
+                                                                                    </ControlTemplate.Triggers>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </Style>
+                                                                </ToolTip.Resources>
+                                                            </ToolTip>
+                                                    </TextBox.ToolTip>
+                                                </TextBox>
+                                                <TextBlock Margin="200,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="85" Name="rasmF1" Text="кгс/см2"  />
+                                                <TextBlock Margin="8,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="155" Name="TextBlockF5" Text="Среднее давление ="  />
+                                                <TextBox FontFamily="Times New Roman" Margin="145,40,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBoxF5" VerticalAlignment="Top" Width="51">
+                                                    <TextBox.ToolTip>
+                                                        <ToolTip FontFamily="Segoe UI" Content="Среднее значение давления газа в баке при наддуве" FontSize="12" ToolTipService.ShowDuration="5">
+                                                            <ToolTip.Resources>
+                                                                <Style TargetType="ToolTip">
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="HasDropShadow" Value="True" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ToolTip">
+                                                                                <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                    <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                </Border>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="HasDropShadow" Value="True">
+                                                                                        <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                        <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ToolTip.Resources>
+                                                        </ToolTip>
+                                                    </TextBox.ToolTip>
+                                                </TextBox>
+                                                <TextBlock Margin="200,40,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="85" Name="rasmF2" Text="кгс/см2"  />
+                                                <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Height="68" Width="266" >
+                                                    <RadioButton Style="{StaticResource HyLoss}" Content="  Гидропотери ξ =" Height="22" FontSize="14" Width="135" HorizontalAlignment="Left" Margin="1,8,0,0" Name="RadioF1" VerticalAlignment="Top" />
+                                                    <TextBox FontFamily="Times New Roman" Margin="135,10,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBoxF7" VerticalAlignment="Top" Width="51">
+                                                        <TextBox.ToolTip>
+                                                            <ToolTip FontFamily="Segoe UI" Content="Коэффициент гидравлических потерь" FontSize="12" ToolTipService.ShowDuration="5">
+                                                                <ToolTip.Resources>
+                                                                    <Style TargetType="ToolTip">
+                                                                        <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                        <Setter Property="HasDropShadow" Value="True" />
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate TargetType="ToolTip">
+                                                                                    <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                        <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                    </Border>
+                                                                                    <ControlTemplate.Triggers>
+                                                                                        <Trigger Property="HasDropShadow" Value="True">
+                                                                                            <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                            <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                        </Trigger>
+                                                                                    </ControlTemplate.Triggers>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </Style>
+                                                                </ToolTip.Resources>
+                                                            </ToolTip>
+                                                        </TextBox.ToolTip>
+                                                    </TextBox>
+                                                    <RadioButton Style="{StaticResource HyRes}" Content="   Гидросопротивление μ =" Height="22" FontSize="14" Width="185" HorizontalAlignment="Left" Margin="1,38,0,0" Name="RadioF2" VerticalAlignment="Top" />
+                                                    <TextBox FontFamily="Times New Roman" Margin="190,40,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBoxF8" VerticalAlignment="Top" Width="51">
+                                                        <TextBox.ToolTip>
+                                                            <ToolTip FontFamily="Segoe UI" Content="Коэффициент гидравлического сопротивления" FontSize="12" ToolTipService.ShowDuration="5">
+                                                                <ToolTip.Resources>
+                                                                    <Style TargetType="ToolTip">
+                                                                        <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                        <Setter Property="HasDropShadow" Value="True" />
+                                                                        <Setter Property="Template">
+                                                                            <Setter.Value>
+                                                                                <ControlTemplate TargetType="ToolTip">
+                                                                                    <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                        <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                    </Border>
+                                                                                    <ControlTemplate.Triggers>
+                                                                                        <Trigger Property="HasDropShadow" Value="True">
+                                                                                            <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                            <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                        </Trigger>
+                                                                                    </ControlTemplate.Triggers>
+                                                                                </ControlTemplate>
+                                                                            </Setter.Value>
+                                                                        </Setter>
+                                                                    </Style>
+                                                                </ToolTip.Resources>
+                                                            </ToolTip>
+                                                        </TextBox.ToolTip>
+                                                    </TextBox>
+                                                </Grid>
+                                                <TextBlock Margin="8,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="210" Name="TextBlockF6" Text="Температура  газа ="  />
+                                                <TextBlock Margin="200,65,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="20" Name="rasmF3a" Text="o"  />
+                                                <TextBlock Margin="208,70,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="20" Name="rasmF3" Text="C"  />
+                                                <TextBox FontFamily="Times New Roman" Margin="145,70,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBoxF6" VerticalAlignment="Top" Width="51">
+                                                    <TextBox.ToolTip>
+                                                        <ToolTip FontFamily="Segoe UI" Content="Температура газа в баке" FontSize="12" ToolTipService.ShowDuration="5">
+                                                            <ToolTip.Resources>
+                                                                <Style TargetType="ToolTip">
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="HasDropShadow" Value="True" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ToolTip">
+                                                                                <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                    <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                </Border>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="HasDropShadow" Value="True">
+                                                                                        <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                        <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ToolTip.Resources>
+                                                        </ToolTip>
+                                                    </TextBox.ToolTip>
+                                                </TextBox>
+                                                <TextBlock Margin="8,100,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="165" Name="TextBlockF1" Text="Макс  уровень  КТ ="  />
+                                                <TextBox FontFamily="Times New Roman" Margin="145,100,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBoxF1" VerticalAlignment="Top" Width="51">
+                                                    <TextBox.ToolTip>
+                                                        <ToolTip FontFamily="Segoe UI" Content="Максимальная величина уровня компонента топлива в баке" FontSize="12" ToolTipService.ShowDuration="5">
+                                                            <ToolTip.Resources>
+                                                                <Style TargetType="ToolTip">
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="HasDropShadow" Value="True" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ToolTip">
+                                                                                <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                    <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                </Border>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="HasDropShadow" Value="True">
+                                                                                        <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                        <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ToolTip.Resources>
+                                                        </ToolTip>
+                                                    </TextBox.ToolTip>
+                                                </TextBox>
+                                                <TextBlock Margin="200,100,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="15" Name="rasmF4" Text="м"  />
+                                                <TextBlock Margin="8,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="210" Name="TextBlockF2" Text="Удельный  вес КТ ="  />
+                                                <TextBox FontFamily="Times New Roman" Margin="145,130,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBoxF2" VerticalAlignment="Top" Width="51">
+                                                    <TextBox.ToolTip>
+                                                        <ToolTip FontFamily="Segoe UI" Content="Удельный вес компонента топлива" FontSize="12" ToolTipService.ShowDuration="5">
+                                                            <ToolTip.Resources>
+                                                                <Style TargetType="ToolTip">
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="HasDropShadow" Value="True" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ToolTip">
+                                                                                <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                    <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                </Border>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="HasDropShadow" Value="True">
+                                                                                        <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                        <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ToolTip.Resources>
+                                                        </ToolTip>
+                                                    </TextBox.ToolTip>
+                                                </TextBox>
+                                                <TextBlock Margin="200,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="40" Name="rasmF5" Text="кг/м3"  />
+                                                <RadioButton Style="{StaticResource FDLa}" FontFamily="Comic Sans MS" Content="   Площадь ЗСМ =" Height="22" FontSize="14" Width="125" HorizontalAlignment="Left" Margin="286,98,0,0" Name="RadioF3" VerticalAlignment="Top" />
+                                                <TextBox FontFamily="Times New Roman" Margin="415,100,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBoxF3" VerticalAlignment="Top" Width="51">
+                                                    <TextBox.ToolTip>
+                                                        <ToolTip FontFamily="Segoe UI" Content="Площадь сечения заправочно-сливной магистрали" FontSize="12" ToolTipService.ShowDuration="5">
+                                                            <ToolTip.Resources>
+                                                                <Style TargetType="ToolTip">
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="HasDropShadow" Value="True" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ToolTip">
+                                                                                <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                    <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                </Border>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="HasDropShadow" Value="True">
+                                                                                        <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                        <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ToolTip.Resources>
+                                                        </ToolTip>
+                                                    </TextBox.ToolTip>
+                                                </TextBox>
+                                                <TextBlock Margin="470,100,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="20" Name="rasmF6" Text="м2"  />
+                                                <RadioButton Style="{StaticResource FDLd}" Content="   Диаметр  ЗСМ =" Height="22" FontSize="14" Width="125" HorizontalAlignment="Left" Margin="286,128,0,0" Name="RadioF4" VerticalAlignment="Top" />
+                                                <TextBox FontFamily="Times New Roman" Margin="415,130,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBoxF9" VerticalAlignment="Top" Width="51">
+                                                    <TextBox.ToolTip>
+                                                        <ToolTip FontFamily="Segoe UI" Content="Диаметр заправочно-сливной магистрали" FontSize="12" ToolTipService.ShowDuration="5">
+                                                            <ToolTip.Resources>
+                                                                <Style TargetType="ToolTip">
+                                                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                                    <Setter Property="HasDropShadow" Value="True" />
+                                                                    <Setter Property="Template">
+                                                                        <Setter.Value>
+                                                                            <ControlTemplate TargetType="ToolTip">
+                                                                                <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                                    <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                </Border>
+                                                                                <ControlTemplate.Triggers>
+                                                                                    <Trigger Property="HasDropShadow" Value="True">
+                                                                                        <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                        <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                                    </Trigger>
+                                                                                </ControlTemplate.Triggers>
+                                                                            </ControlTemplate>
+                                                                        </Setter.Value>
+                                                                    </Setter>
+                                                                </Style>
+                                                            </ToolTip.Resources>
+                                                        </ToolTip>
+                                                    </TextBox.ToolTip>
+                                                </TextBox>
+                                                <TextBlock Margin="470,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="15" Name="rasmF7" Text="м"  />
+                                            </Grid>
+                                        </GroupBox>
+                                        <Button FontFamily="Comic Sans MS" Content="Расчет" Height="40" FontSize="26" HorizontalAlignment="Left" Margin="375,235,0,0" Name="ButtonF1" VerticalAlignment="Top" Width="100" Template="{StaticResource ButtonTemplate2}" />
+                                        <!--<Button FontFamily="Comic Sans MS" Content="По объемному расходу" Height="40" FontSize="16" HorizontalAlignment="Left" Margin="300,230,0,0" Name="ButtonF3" VerticalAlignment="Top" Width="206" Template="{StaticResource ButtonTemplate2}" /> использовалась для расчета по объемному расходу без применения ckeckbox-->
+                                        <TextBlock FontFamily="Comic Sans MS" Margin="20,239,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="160" Name="TextBlockF7" Text="Объемный расход ="  />
+                                        <TextBox FontFamily="Times New Roman" Margin="160,240,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBoxF10" VerticalAlignment="Top" Width="51">
+                                            <TextBox.ToolTip>
+                                                <ToolTip FontFamily="Segoe UI" Content="Объемный расход компонента при сливе" FontSize="12" ToolTipService.ShowDuration="5">
+                                                    <ToolTip.Resources>
+                                                        <Style TargetType="ToolTip">
+                                                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                            <Setter Property="HasDropShadow" Value="True" />
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="ToolTip">
+                                                                        <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                            <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                        </Border>
+                                                                        <ControlTemplate.Triggers>
+                                                                            <Trigger Property="HasDropShadow" Value="True">
+                                                                                <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                            </Trigger>
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </ToolTip.Resources>
+                                                </ToolTip>
+                                            </TextBox.ToolTip>
+                                        </TextBox>
+                                        <TextBlock FontFamily="Comic Sans MS" Margin="215,240,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="85" Name="rasmF8" Text="л/мин"  />
+                                        <TextBlock FontFamily="Comic Sans MS" Margin="20,279,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="150" Name="TextBlockF8" Text="Массовый расход ="  />
+                                        <TextBox FontFamily="Times New Roman" Margin="160,280,0,0" Height="20" FontSize="12" HorizontalAlignment="Left" Name="TextBoxF11" VerticalAlignment="Top" Width="51">
+                                            <TextBox.ToolTip>
+                                                <ToolTip FontFamily="Segoe UI" Content="Массовый расход газа при сливе" FontSize="12" ToolTipService.ShowDuration="5">
+                                                    <ToolTip.Resources>
+                                                        <Style TargetType="ToolTip">
+                                                            <Setter Property="OverridesDefaultStyle" Value="True" />
+                                                            <Setter Property="HasDropShadow" Value="True" />
+                                                            <Setter Property="Template">
+                                                                <Setter.Value>
+                                                                    <ControlTemplate TargetType="ToolTip">
+                                                                        <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                                            <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                        </Border>
+                                                                        <ControlTemplate.Triggers>
+                                                                            <Trigger Property="HasDropShadow" Value="True">
+                                                                                <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                                                <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                                            </Trigger>
+                                                                        </ControlTemplate.Triggers>
+                                                                    </ControlTemplate>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Style>
+                                                    </ToolTip.Resources>
+                                                </ToolTip>
+                                            </TextBox.ToolTip>
+                                        </TextBox>
+                                        <TextBlock FontFamily="Comic Sans MS" Margin="215,280,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="14" Height="19" Width="55" Name="rasmF9" Text="кг/с"  />
+                                        <CheckBox Content="По объемному расходу" FontFamily="Comic Sans MS" FontSize="13" Height="19" HorizontalAlignment="Left" Margin="339,283,0,0" Name="CheckBox2" Style="{StaticResource CheckBoxTemp}" VerticalAlignment="Top" Width="180" />
+                                    </Grid>
+                                </Border>
+                                <Grid.Triggers>
+                                    <EventTrigger RoutedEvent="Grid.Loaded">
+                                        <EventTrigger.Actions>
+                                            <BeginStoryboard>
+                                                <Storyboard Duration="00:00:00.4">
+                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                         Storyboard.TargetName="grid2"
+                                                         Duration="0:0:00.4" AutoReverse="False"
+                                                         FillBehavior="HoldEnd"                                                 
+                                         AccelerationRatio="0.7" From="-10,0,0,0" To="0,0,0,0" />
+                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                         Storyboard.TargetName="grid2"
+                                                         Duration="0:0:00.4" AutoReverse="False"
+                                                         FillBehavior="HoldEnd"                                                       
+                                         AccelerationRatio="0.7" From="0" To="1"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger.Actions>
+                                    </EventTrigger>
+                                </Grid.Triggers>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                    <Button FontFamily="Comic Sans MS" Content="About" Height="18" FontSize="11" HorizontalAlignment="Left" Margin="520,8,0,0" Name="Button4" VerticalAlignment="Top" Width="50" Template="{StaticResource ButtonTemplate2}" />
+                </Grid>
+                <Button Margin="0,3,3,0" Template="{StaticResource ButtonTemplate}" Opacity="1" Height="20" Background="Transparent" BorderBrush="AliceBlue" HorizontalAlignment="Right" Name="button2" VerticalAlignment="Top" Width="20">
+                    <TextBlock FontSize="11" FontFamily="Comic Sans MS">X</TextBlock>
+                    <Button.ToolTip>
+                        <ToolTip FontFamily="Segoe UI" Content="Close" FontSize="12" ToolTipService.ShowDuration="10">
+                            <ToolTip.Resources>
+                                <Style TargetType="ToolTip">
+                                    <Setter Property="OverridesDefaultStyle" Value="True" />
+                                    <Setter Property="HasDropShadow" Value="True" />
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ToolTip">
+                                                <Border Name="Border" BorderThickness="1" BorderBrush="LightSkyBlue" Background="White"
+                                        Width="{DynamicResource Width}" Height="{DynamicResource Height}">
+                                                    <ContentPresenter Margin="5,2,5,2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="HasDropShadow" Value="True">
+                                                        <Setter TargetName="Border" Property="CornerRadius" Value="1" />
+                                                        <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="True" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ToolTip.Resources>
+                        </ToolTip>
+                    </Button.ToolTip>
+                </Button>
+                <StatusBar FontSize="12" FontFamily="Comic Sans MS" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Height="20">
+                    <StatusBarItem Name="Status"  Content="Готово"></StatusBarItem>
+                    <StatusBar.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStopCollection>
+                                <GradientStop Color="White" Offset="0.0"></GradientStop>
+                                <GradientStop Color="#effdff" Offset="0.6"></GradientStop>
+                            </GradientStopCollection>
+                        </LinearGradientBrush>
+                    </StatusBar.Background>
+                </StatusBar>
+            </Grid>
+        </Border>
+        <!--<Rectangle Name="Rec1" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Right" Fill="Transparent" Cursor="SizeWE"
+                   MouseLeftButtonDown="Rec1_MouseLeftButtonDown" 
+                   MouseLeftButtonUp="Rec1_MouseLeftButtonUp" 
+                   MouseMove="Rec1_MouseMove"></Rectangle>
+        <Rectangle Name="Rec2" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Fill="Transparent" Cursor="SizeNS"
+                   MouseLeftButtonDown="Rec2_MouseLeftButtonDown" 
+                   MouseLeftButtonUp="Rec2_MouseLeftButtonUp" 
+                   MouseMove="Rec2_MouseMove"></Rectangle>-->
+        <Rectangle Name="grid0" Height="30" Fill="Transparent" VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                   Margin="0,0,21,0"></Rectangle>
+
+
+        <!--<ResizeGrip Margin="0,0,2,2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Name="ResGrip" Cursor="SizeNWSE"  
+                                MouseLeftButtonDown="ResGrip_MouseLeftButtonDown" 
+                                MouseLeftButtonUp="ResGrip_MouseLeftButtonUp" 
+                                MouseMove="ResGrip_MouseMove" />-->      
+    </Grid>
+</Window>
